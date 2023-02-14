@@ -28,7 +28,7 @@ export default function EarthquakeTable() {
     return dateTime;
   };
   const getYesterday = () => {
-    var yesterday = new Date(Date.now() - 864e5 * 10);
+    var yesterday = new Date(Date.now() - 864e5 * 1);
 
     var day: any = yesterday.getDate();
     day = day < 10 ? "0" + day : day;
@@ -77,7 +77,10 @@ export default function EarthquakeTable() {
   const [limit, setLimit] = useState<any>(10000);
   const [orderBy, setOrderBy] = useState<any>("timedesc");
   const [numberOfDays, setNumberOfDays] = useState<any>(1);
-
+  const [clickedChip, setClickedChip] = useState<any>([
+    { province: "province", numberofEarthquake: "numberOfEarthquake" },
+  ]);
+  const [filteredEarthquakes, setFilteredEarthquakes] = useState<any>([]);
   const getRegions = () => {
     axios
       .get(`https://depremolabilir-api.vercel.app/regions`)
@@ -90,6 +93,10 @@ export default function EarthquakeTable() {
     getRegions();
     console.log(regions);
   }, []);*/
+
+  useEffect(() => {
+    console.log(filteredEarthquakes);
+  }, [clickedChip]);
 
   const getEarthquakes = () => {
     axios
@@ -116,11 +123,6 @@ export default function EarthquakeTable() {
     return Difference_In_Days;
   };
 
-  useEffect(() => {
-    getEarthquakes();
-    getTimeDifference();
-  }, []);
-
   const getCityEarthquakes = () => {
     var tempResult: any = {};
 
@@ -134,12 +136,41 @@ export default function EarthquakeTable() {
     let result = Object.values(tempResult).sort(
       (a: any, b: any) => b.numberOfEarthquake - a.numberOfEarthquake
     );
-    console.log(result);
+
     return result;
   };
+
+  const filterCityEarthquakes = async (city: string) => {
+    const filteredCity = await earthquakes.filter(function (earthquake: any) {
+      return earthquake.province == city;
+    });
+    setFilteredEarthquakes(filteredCity);
+  };
+
+  const getFromChip = (e: any) => {
+    var data = e.target.innerText;
+    var province = data.split(":")[0].trim();
+    var numberOfEarthquake = data.split(":")[1].trim();
+
+    var data: any = [
+      { province: province, numberofEarthquake: numberOfEarthquake },
+    ];
+    filterCityEarthquakes(province);
+    setClickedChip(data);
+  };
+
+  useEffect(() => {
+    getEarthquakes();
+    getTimeDifference();
+  }, []);
+
   return (
     <div>
-      <EarthMenu data={getCityEarthquakes()} title={numberOfDays} />
+      <EarthMenu
+        data={getCityEarthquakes()}
+        title={numberOfDays}
+        onClick={getFromChip}
+      />
 
       <table id="earthquake-table">
         <thead>

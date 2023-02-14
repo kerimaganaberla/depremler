@@ -15,6 +15,7 @@ export default function EarthErrorChip(props: any) {
       color="error"
       icon={<ErrorIcon />}
       label={props.label}
+      onClick={props.onClick}
     />
   );
 }

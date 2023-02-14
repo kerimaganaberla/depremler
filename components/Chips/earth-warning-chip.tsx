@@ -15,6 +15,7 @@ export default function EarthWarningChip(props: any) {
       color="warning"
       icon={<WarningIcon />}
       label={props.label}
+      onClick={props.onClick}
     />
   );
 }
