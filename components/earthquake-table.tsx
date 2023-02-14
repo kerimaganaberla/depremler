@@ -1,16 +1,107 @@
 import axios from "axios";
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import { Chip, TablePagination } from "@mui/material";
+import WarningIcon from '@mui/icons-material/Warning';
+import ErrorIcon from '@mui/icons-material/Error';
+import {ScrollMenu} from 'react-horizontal-scrolling-menu';
+import data from "../lib/constants/regions-data.json";
+import LeftArrow from "./HorizontalMenu/LeftArrow";
+import RightArrow from "./HorizontalMenu/RightArrow";
 export default function EarthquakeTable() {
-  const [earthquakes, setEarthquakes] = React.useState<any>([]);
+  const getToday = () => {
+    var today = new Date();
+    var day: any = today.getDate();
+    day = day < 10 ? "0" + day : day;
+    var month: any = today.getMonth() + 1;
+    month = month < 10 ? "0" + month : month;
+    var year = today.getFullYear();
+
+    var date = year + "-" + month + "-" + day;
+
+    var hour: any = today.getHours();
+    hour = hour > 24 ? hour - 24 : hour;
+    hour = hour < 10 ? "0" + hour : hour;
+    var minute: any = today.getMinutes();
+    minute = minute < 10 ? "0" + minute : minute;
+    var second: any = today.getSeconds();
+    second = second < 10 ? "0" + second : second;
+
+    var time = hour + ":" + minute + ":" + second;
+    var dateTime = date + " " + time;
+
+    return dateTime;
+  };
+  const getYesterday = () => {
+    var yesterday = new Date(Date.now() - 864e5 * 1);
+
+    var day: any = yesterday.getDate();
+    day = day < 10 ? "0" + day : day;
+    var month: any = yesterday.getMonth() + 1;
+    month = month < 10 ? "0" + month : month;
+    var year = yesterday.getFullYear();
+
+    var date = year + "-" + month + "-" + day;
+
+    var hour: any = yesterday.getHours();
+    hour = hour > 24 ? hour - 24 : hour;
+    hour = hour < 10 ? "0" + hour : hour;
+    var minute: any = yesterday.getMinutes();
+    minute = minute < 10 ? "0" + minute : minute;
+    var second: any = yesterday.getSeconds();
+    second = second < 10 ? "0" + second : second;
+
+    var time = hour + ":" + minute + ":" + second;
+    var dateTime = date + " " + time;
+
+    return dateTime;
+  };
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+  const [earthquakes, setEarthquakes] = useState<any>([]);
+  const [regions, setRegions] = useState<any>(data);
+  const [startDate, setStartDate] = useState<any>(getYesterday());
+  const [endDate, setEndDate] = useState<any>(getToday());
+  const [minLat, setMinLat] = useState<any>(35.2);
+  const [maxLat, setMaxLat] = useState<any>(42.34);
+  const [minLon, setMinLon] = useState<any>(25.14);
+  const [maxLon, setMaxLon] = useState<any>(45.34);
+  const [minMag, setMinMag] = useState<any>(0);
+  const [limit, setLimit] = useState<any>(10000);
+  const [orderBy, setOrderBy] = useState<any>("timedesc");
+
+  const getRegions = () => {
+    axios.get(`http://localhost:3000/api/regions`).then((response) => {
+      setRegions(response.data);
+      console.log(response.data);
+    });
+  };
+  /*useEffect(() => {
+    getRegions();
+    console.log(regions);
+  }, []);*/
+
   const getEarthquakes = () => {
     axios
       .get(
-        "https://deprem.afad.gov.tr/apiv2/event/filter?minlat=25&maxlat=42&minlon=25&maxlon=30&start=2020-09-14%2010:00:00&end=2020-09-16%2010:00:00"
+        `http://localhost:3000/api/earthquake?minlat=${minLat}&maxlat=${maxLat}&minlon=${minLon}&maxlon=${maxLon}&start=${startDate}&end=${endDate}&limit=${limit}&orderby=${orderBy}&minmag=${minMag}`,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
       )
       .then((response) => {
         setEarthquakes(response.data);
-        console.log(response.data);
       });
   };
   useEffect(() => {
@@ -18,23 +109,71 @@ export default function EarthquakeTable() {
   }, []);
 
   return (
+
     <div>
-      <table>
-        <tr>
-          <th>Şehir</th>
-          <th>Büyüklük</th>
-          <th>Bölge</th>
-        </tr>
-        {earthquakes.map((earthquake: any) => {
-          return (
-            <tr>
-              <td>{earthquake.province}</td>
-              <td>{earthquake.district}</td>
-              <td>{earthquake.magnitude}</td>
-            </tr>
-          );
-        })}
+    <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} style={{marginBottom:"20px"}}>
+    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
+    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
+    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
+    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
+    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
+    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
+    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
+    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
+    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
+  </ScrollMenu>
+     
+     
+      
+      <table id="earthquake-table">
+        <thead>
+          <tr>
+            <th>Şehir</th>
+            <th>Semt</th>
+            <th>Büyüklük</th>
+            <th>Tarih</th>
+            <th>Derinlik</th>
+          </tr>
+        </thead>
+        <tbody>
+          {earthquakes
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((earthquake: any, index: any) => {
+              var date =
+                earthquake.date != "null"
+                  ? new Date(earthquake.date).toLocaleString()
+                  : "null";
+
+              return (
+                <tr key={index} id={earthquake.eventID}>
+                  <td>
+                    {earthquake.province == null
+                      ? earthquake.location
+                      : earthquake.province}
+                  </td>
+                  <td>
+                    {earthquake.district == null
+                      ? earthquake.location
+                      : earthquake.district}
+                  </td>
+                  <td>{earthquake.magnitude}</td>
+                  <td>{date}</td>
+                  <td>{earthquake.depth} KM</td>
+                </tr>
+              );
+            })}
+        </tbody>
       </table>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={earthquakes.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{ color: "grey" }}
+      />
     </div>
   );
 }

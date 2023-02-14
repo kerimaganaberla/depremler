@@ -11,7 +11,8 @@ export default function Header() {
       <ThemeButton />
 
       <div className="ml-auto">
-        <DirectButton to="/iletisim" buttonText="İletişim" />
+        <DirectButton to="/nasil-kullanilir" buttonText="Nasıl Kullanılır?" width={48} />
+        <DirectButton to="/iletisim" buttonText="İletişim"  width={24}/>
       </div>
     </header>
   );
