@@ -80,7 +80,7 @@ export default function EarthquakeTable() {
 
   const getRegions = () => {
     axios
-      .get(`https://depremolabilir.vercel.app/api/regions`)
+      .get(`https://depremolabilir-api.vercel.app/regions`)
       .then((response) => {
         setRegions(response.data);
         console.log(response.data);
@@ -94,7 +94,7 @@ export default function EarthquakeTable() {
   const getEarthquakes = () => {
     axios
       .get(
-        `https://depremolabilir.vercel.app/api/earthquake?minlat=${minLat}&maxlat=${maxLat}&minlon=${minLon}&maxlon=${maxLon}&start=${startDate}&end=${endDate}&limit=${limit}&orderby=${orderBy}&minmag=${minMag}`,
+        `https://depremolabilir-api.vercel.app/earthquake?minlat=${minLat}&maxlat=${maxLat}&minlon=${minLon}&maxlon=${maxLon}&start=${startDate}&end=${endDate}&limit=${limit}&orderby=${orderBy}&minmag=${minMag}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
