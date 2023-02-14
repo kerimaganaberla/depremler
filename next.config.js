@@ -6,3 +6,4 @@ const nextConfig = {
 };
 
 module.exports = withNextTranslate(nextConfig);
+

@@ -96,7 +96,10 @@ export default function EarthquakeTable() {
       .get(
         `https://depremolabilir.vercel.app/api/earthquake?minlat=${minLat}&maxlat=${maxLat}&minlon=${minLon}&maxlon=${maxLon}&start=${startDate}&end=${endDate}&limit=${limit}&orderby=${orderBy}&minmag=${minMag}`,
         {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
         }
       )
       .then((response) => {
