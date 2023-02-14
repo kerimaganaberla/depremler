@@ -1,12 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Chip, TablePagination } from "@mui/material";
-import WarningIcon from '@mui/icons-material/Warning';
-import ErrorIcon from '@mui/icons-material/Error';
-import {ScrollMenu} from 'react-horizontal-scrolling-menu';
 import data from "../lib/constants/regions-data.json";
-import LeftArrow from "./HorizontalMenu/LeftArrow";
-import RightArrow from "./HorizontalMenu/RightArrow";
+import EarthMenu from "./HorizontalMenu/earth-menu";
 export default function EarthquakeTable() {
   const getToday = () => {
     var today = new Date();
@@ -32,7 +28,7 @@ export default function EarthquakeTable() {
     return dateTime;
   };
   const getYesterday = () => {
-    var yesterday = new Date(Date.now() - 864e5 * 1);
+    var yesterday = new Date(Date.now() - 864e5 * 10);
 
     var day: any = yesterday.getDate();
     day = day < 10 ? "0" + day : day;
@@ -80,6 +76,7 @@ export default function EarthquakeTable() {
   const [minMag, setMinMag] = useState<any>(0);
   const [limit, setLimit] = useState<any>(10000);
   const [orderBy, setOrderBy] = useState<any>("timedesc");
+  const [numberOfDays, setNumberOfDays] = useState<any>(1);
 
   const getRegions = () => {
     axios.get(`http://localhost:3000/api/regions`).then((response) => {
@@ -104,27 +101,41 @@ export default function EarthquakeTable() {
         setEarthquakes(response.data);
       });
   };
+
+  const getTimeDifference = () => {
+    var date1 = new Date(startDate);
+    var date2 = new Date(endDate);
+    var Difference_In_Time = date2.getTime() - date1.getTime();
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    setNumberOfDays(Difference_In_Days);
+    return Difference_In_Days;
+  };
+
   useEffect(() => {
     getEarthquakes();
+    getTimeDifference();
   }, []);
 
-  return (
+  const getCityEarthquakes = () => {
+    var tempResult: any = {};
 
+    for (let { province } of earthquakes)
+      tempResult[province] = {
+        province,
+        numberOfEarthquake: tempResult[province]
+          ? tempResult[province].numberOfEarthquake + 1
+          : 1,
+      };
+    let result = Object.values(tempResult).sort(
+      (a: any, b: any) => b.numberOfEarthquake - a.numberOfEarthquake
+    );
+    console.log(result);
+    return result;
+  };
+  return (
     <div>
-    <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} style={{marginBottom:"20px"}}>
-    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
-    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
-    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
-    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
-    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
-    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
-    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
-    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
-    <Chip sx={{width:"200px", height:"50px", fontSize:"20px", borderRadius:"25px", fontWeight:"bold", fontFamily:""}} color="error" icon={<ErrorIcon />} label="İstanbul : 3" />
-  </ScrollMenu>
-     
-     
-      
+      <EarthMenu data={getCityEarthquakes()} title={numberOfDays} />
+
       <table id="earthquake-table">
         <thead>
           <tr>
