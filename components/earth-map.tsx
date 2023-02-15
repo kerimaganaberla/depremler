@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, useMap, Popup } from "react-leaflet";
 import L from "leaflet";
+import { useTheme } from "next-themes";
 const icon = L.icon({
   iconUrl: "./location.png",
   iconSize: [25, 25],
@@ -19,16 +20,25 @@ export function ChangeView(props: any) {
 
 export default function Map(props: any) {
   const center: any = [38.734802, 35.467987];
-
+  const { resolvedTheme, setTheme } = useTheme();
   return (
     <MapContainer
       center={center}
       zoom={100}
-      style={{ height: "100vh", borderRadius: "25px", marginTop: "20px" }}
+      style={{
+        height: "100vh",
+        borderRadius: "25px",
+        marginTop: "20px",
+      }}
     >
+      <button>hello</button>
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='{&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url={
+          resolvedTheme == "dark"
+            ? "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+            : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        }
       />
       {props.data[0] &&
         props.data[0] &&
@@ -42,7 +52,6 @@ export default function Map(props: any) {
               icon={icon}
             >
               <Popup>
-                {console.log(date)}
                 <h3>
                   <b> {item.province}</b>
                 </h3>{" "}
