@@ -8,7 +8,7 @@ import EarthErrorChip from "../Chips/earth-danger-chip";
 function EarthMenu(props: any) {
   return (
     <div>
-      <h2 style={{ marginBottom: "10px" }}>Son {props.title} günde</h2>
+      <h2 style={{ marginBottom: "10px" }}>{props.region} - Son {props.title} Gündeki <b>></b> {props.minMag} Depremler</h2>
       <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
         {props.data.map((item: any, index: any) => {
           if (item.numberOfEarthquake >= 4) {

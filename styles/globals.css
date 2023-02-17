@@ -139,4 +139,11 @@
 [data-theme="dark"] .earth-map{
   filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
 }
+
+#searchButton:hover {
+  background: -webkit-linear-gradient(to right, rgba(248, 27, 27, 0.3), rgba(248, 149, 27, 0.44)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(to right, rgba(248, 27, 27, 0.3), rgba(248, 149, 27, 0.44)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(to right, rgba(248, 27, 27, 0.3), rgba(248, 149, 27, 0.44)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, rgba(248, 27, 27, 0.3), rgba(248, 149, 27, 0.44)); /* Standard syntax (must be last) */
+}
 }

@@ -7,6 +7,10 @@ const icon = L.icon({
   iconUrl: "./location.png",
   iconSize: [25, 25],
 });
+const iconNoData = L.icon({
+  iconUrl: "./nodata.png",
+  iconSize: [25, 25],
+});
 function addHours(date: any, hours: any) {
   date.setTime(date.getTime() + hours * 60 * 60 * 1000);
 
@@ -31,7 +35,6 @@ export default function Map(props: any) {
         marginTop: "20px",
       }}
     >
-      <button>hello</button>
       <TileLayer
         attribution='{&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url={
@@ -47,9 +50,17 @@ export default function Map(props: any) {
 
           return (
             <Marker
-              key={item.eventID}
-              position={[item.latitude, item.longitude]}
-              icon={icon}
+              key={item.eventID == "null" ? index : item.eventID}
+              position={
+                item.latitude != "null" && item.longitude != "null"
+                  ? [item.latitude, item.longitude]
+                  : center
+              }
+              icon={
+                item.latitude != "null" && item.longitude != "null"
+                  ? icon
+                  : iconNoData
+              }
             >
               <Popup>
                 <h3>

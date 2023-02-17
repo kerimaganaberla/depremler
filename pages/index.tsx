@@ -1,14 +1,37 @@
 import axios from "axios";
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react";
 import EarthquakeTable from "@/components/earthquake-table";
 import dynamic from "next/dynamic";
 import data from "../lib/constants/regions-data.json";
 import EarthMenu from "@/components/HorizontalMenu/earth-menu";
+import EarthSelect from "@/components/earth-select";
 const EarthMap = dynamic(() => import("@/components/earth-map"), {
   ssr: false,
 });
 export default function Home() {
+  const arrangeDate = (date: any) => {
+    var today = date;
+    var day: any = today.getDate();
+    day = day < 10 ? "0" + day : day;
+    var month: any = today.getMonth() + 1;
+    month = month < 10 ? "0" + month : month;
+    var year = today.getFullYear();
 
+    var date = year + "-" + month + "-" + day;
+
+    var hour: any = today.getHours();
+    hour = hour > 24 ? hour - 24 : hour;
+    hour = hour < 10 ? "0" + hour : hour;
+    var minute: any = today.getMinutes();
+    minute = minute < 10 ? "0" + minute : minute;
+    var second: any = today.getSeconds();
+    second = second < 10 ? "0" + second : second;
+
+    var time = hour + ":" + minute + ":" + second;
+    var dateTime = date + " " + time;
+
+    return dateTime;
+  };
   const getToday = () => {
     var today = new Date();
     var day: any = today.getDate();
@@ -32,7 +55,7 @@ export default function Home() {
 
     return dateTime;
   };
- const getYesterday = () => {
+  const getYesterday = () => {
     var yesterday = new Date(Date.now() - 864e5 * 1);
 
     var day: any = yesterday.getDate();
@@ -58,6 +81,8 @@ export default function Home() {
   };
   const [earthquakes, setEarthquakes] = useState<any>([]);
   const [regions, setRegions] = useState<any>(data);
+  const [region, setRegion] = useState<any>(["Türkiye"]);
+  const [regionX, setRegionX] = useState<any>([]);
   const [startDate, setStartDate] = useState<any>(getYesterday());
   const [endDate, setEndDate] = useState<any>(getToday());
   const [minLat, setMinLat] = useState<any>(35.2);
@@ -65,22 +90,27 @@ export default function Home() {
   const [minLon, setMinLon] = useState<any>(25.14);
   const [maxLon, setMaxLon] = useState<any>(45.34);
   const [minMag, setMinMag] = useState<any>(0);
+  const [minMagX, setMinMagX] = useState<any>(0);
   const [limit, setLimit] = useState<any>(10000);
   const [orderBy, setOrderBy] = useState<any>("timedesc");
   const [numberOfDays, setNumberOfDays] = useState<any>(1);
+  const [numberOfDaysX, setNumberOfDaysX] = useState<any>(1);
   const [clickedChip, setClickedChip] = useState<any>([
     { province: "province", numberofEarthquake: "numberOfEarthquake" },
   ]);
   const [filteredEarthquakes, setFilteredEarthquakes] = useState<any>([]);
-  const getRegions = () => {
+  /* const getRegions = () => {
     axios
       .get(`https://depremolabilir-api.vercel.app/regions`)
       .then((response) => {
         setRegions(response.data);
-        console.log(response.data);
+        
+        
+        
+        (response.data);
       });
   };
-  /*useEffect(() => {
+useEffect(() => {
     getRegions();
     console.log(regions);
   }, []);*/
@@ -146,24 +176,65 @@ export default function Home() {
     setClickedChip(data);
   };
 
-  useEffect(() => {
+  function getRegionValuesAsList(item: any) {
+    var valueList = item[0].split(",");
+    return valueList;
+  }
+  function getSubstractedStartDate(date: any, dayNumber: any) {
+    var d = new Date(date);
+
+  
+    d.setDate(d.getDate() - dayNumber);
+
+    return arrangeDate(d);
+  }
+  const onSearchClick = (e: any) => {
+    e.preventDefault();
+
+    getEarthquakes();
+  };
+
+ /* useEffect(() => {
     console.log(filteredEarthquakes);
-  }, [clickedChip]);
+  }, [clickedChip]);*/
 
   useEffect(() => {
     getEarthquakes();
     getTimeDifference();
   }, []);
 
+  useEffect(() => {
+
+
+    setMinLat(parseFloat(region[1]));
+    setMaxLat(parseFloat(region[2]));
+    setMinLon(parseFloat(region[3]));
+    setMaxLon(parseFloat(region[4]));
+  }, [region]);
+
+  useEffect(() => {
+    setStartDate(getSubstractedStartDate(getToday(), numberOfDays));
+  }, [numberOfDays]);
   return (
     <>
-    <EarthMenu
+      <EarthMenu
         data={getCityEarthquakes()}
         title={numberOfDays}
+        region={region[0]}
+        minMag={minMag}
         onClick={getFromChip}
       />
-      <EarthMap data={earthquakes}/>
-      <EarthquakeTable data={earthquakes}/>
+      <EarthMap data={earthquakes} />
+      <EarthSelect
+        regions={regions}
+        onMagnitudeSelect={(e: any) => setMinMag(e.target.value)}
+        onRegionSelect={(e: any) =>
+          setRegion(getRegionValuesAsList([e.target.value]))
+        }
+        onDaysSelect={(e: any) => setNumberOfDays(e.target.value)}
+        onSearchClick={onSearchClick}
+      />
+      <EarthquakeTable data={earthquakes} />
     </>
   );
 }

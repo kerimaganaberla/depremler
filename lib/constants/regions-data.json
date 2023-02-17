@@ -18,10 +18,10 @@
   {
     "id": "akdeniz",
     "region": "Akdeniz Bölgesi",
-    "minlat": 35.18,
-    "maxlat": 37.18,
-    "minlon": 27.02,
-    "maxlon": 37.04
+    "minlat": 34.48,
+    "maxlat": 38.1,
+    "minlon": 28.35,
+    "maxlon": 38.04
   },
   {
     "id": "karadeniz",
