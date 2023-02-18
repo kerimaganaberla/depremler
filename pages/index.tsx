@@ -82,7 +82,6 @@ export default function Home() {
   const [earthquakes, setEarthquakes] = useState<any>([]);
   const [regions, setRegions] = useState<any>(data);
   const [region, setRegion] = useState<any>(["Türkiye"]);
-  const [regionX, setRegionX] = useState<any>([]);
   const [startDate, setStartDate] = useState<any>(getYesterday());
   const [endDate, setEndDate] = useState<any>(getToday());
   const [minLat, setMinLat] = useState<any>(35.2);
@@ -90,11 +89,11 @@ export default function Home() {
   const [minLon, setMinLon] = useState<any>(25.14);
   const [maxLon, setMaxLon] = useState<any>(45.34);
   const [minMag, setMinMag] = useState<any>(0);
-  const [minMagX, setMinMagX] = useState<any>(0);
   const [limit, setLimit] = useState<any>(10000);
   const [orderBy, setOrderBy] = useState<any>("timedesc");
   const [numberOfDays, setNumberOfDays] = useState<any>(1);
-  const [numberOfDaysX, setNumberOfDaysX] = useState<any>(1);
+  const [loading, setLoading] = useState<any>(true);
+
   const [clickedChip, setClickedChip] = useState<any>([
     { province: "province", numberofEarthquake: "numberOfEarthquake" },
   ]);
@@ -128,6 +127,7 @@ useEffect(() => {
       )
       .then((response) => {
         setEarthquakes(response.data);
+        setLoading(false);
       });
   };
 
@@ -189,7 +189,7 @@ useEffect(() => {
   }
   const onSearchClick = (e: any) => {
     e.preventDefault();
-
+    setLoading(true);
     getEarthquakes();
   };
 
@@ -230,6 +230,7 @@ useEffect(() => {
         }
         onDaysSelect={(e: any) => setNumberOfDays(e.target.value)}
         onSearchClick={onSearchClick}
+        onLoading={loading}
       />
       <EarthquakeTable data={earthquakes} />
     </>

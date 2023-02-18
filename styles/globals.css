@@ -72,6 +72,14 @@
     input[type="radio"] {
         @apply text-blue-500 focus:ring-0;
     }*/
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
 #earthquake-table{
   border-radius:"25px"
 }
