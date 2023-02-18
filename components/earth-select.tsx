@@ -40,7 +40,7 @@ export default function EarthSelect(props: any) {
               className="focus:shadow-outline block w-full appearance-none rounded-full border border-gray-400 bg-white  py-2 text-center leading-tight shadow hover:border-gray-500 focus:outline-none"
             >
               <option value="DEFAULT" disabled>
-                X'ten büyük depremler
+                X&apos;ten büyük depremler
               </option>
               <option value={0}>0</option>
               <option value={1}>1</option>
