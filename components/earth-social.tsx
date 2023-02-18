@@ -8,8 +8,10 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 function EarthSocial(props: any) {
   return (
     <div>
-      <div  className="grid grid-cols-1 grid-rows-1" style={{ display: "column", justifyContent: "center" }}>
-
+      <div
+        className="grid grid-cols-1 grid-rows-1"
+        style={{ display: "column", justifyContent: "center" }}
+      >
         <Link
           target="_blank"
           href={props.github}
@@ -27,7 +29,7 @@ function EarthSocial(props: any) {
           <LinkedInIcon />
           <span className="ml-1">Linkedin</span>
         </Link>
-        <DirectButton to="/hakkinda" buttonText="Hakkında" width={30} />
+   
       </div>
     </div>
   );

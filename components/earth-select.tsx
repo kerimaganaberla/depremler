@@ -157,7 +157,7 @@ export default function EarthSelect(props: any) {
                     cy="12"
                     r="10"
                     stroke="red"
-                    stroke-width="4"
+                    strokeWidth="4"
                   ></circle>
                   <path
                     className="opacity-75"

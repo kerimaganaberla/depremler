@@ -1,117 +1,210 @@
 import BackButton from "@/components/back-button";
+import EarthSocial from "@/components/earth-social";
+import Carousel from "react-material-ui-carousel";
+import Image from "next/image";
 
 export default function Hakkinda() {
   return (
     <div>
       {" "}
       <BackButton />
-      <div
-        id="carouselExampleCaptions"
-        className="carousel slide relative"
-        data-bs-ride="carousel"
+      <h2
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "10px",
+        }}
       >
-        <div className="carousel-indicators absolute right-0 bottom-0 left-0 mb-4 flex justify-center p-0">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to="0"
-            className="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
-        </div>
-        <div className="carousel-inner relative w-full overflow-hidden">
-          <div className="carousel-item active relative float-left w-full">
-            <div
-              className="relative overflow-hidden bg-cover bg-no-repeat"
-              style={{ backgroundPosition: "50%" }}
-            >
-              <img
-                src="https://mdbootstrap.com/img/Photos/Slides/img%20(123).jpg"
-                className="block w-full"
-              />
-              <div className="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-black bg-fixed opacity-50"></div>
-            </div>
-            <div className="carousel-caption absolute hidden text-center md:block">
-              <h5 className="text-xl">First slide label</h5>
-              <p>
-                Some representative placeholder content for the first slide.
-              </p>
-            </div>
-          </div>
-          <div className="carousel-item relative float-left w-full">
-            <div
-              className="relative overflow-hidden bg-cover bg-no-repeat"
-              style={{ backgroundPosition: "50%" }}
-            >
-              <img
-                src="https://mdbootstrap.com/img/Photos/Slides/img%20(124).jpg"
-                className="block w-full"
-              />
-              <div className="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-black bg-fixed opacity-50"></div>
-            </div>
-            <div className="carousel-caption absolute hidden text-center md:block">
-              <h5 className="text-xl">Second slide label</h5>
-              <p>
-                Some representative placeholder content for the second slide.
-              </p>
-            </div>
-          </div>
-          <div className="carousel-item relative float-left w-full">
-            <div
-              className="relative overflow-hidden bg-cover bg-no-repeat"
-              style={{ backgroundPosition: "50%" }}
-            >
-              <img
-                src="https://mdbootstrap.com/img/Photos/Slides/img%20(125).jpg"
-                className="block w-full"
-              />
-              <div className="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-black bg-fixed opacity-50"></div>
-            </div>
-            <div className="carousel-caption absolute hidden text-center md:block">
-              <h5 className="text-xl">Third slide label</h5>
-              <p>
-                Some representative placeholder content for the third slide.
-              </p>
-            </div>
-          </div>
-        </div>
-        <button
-          className="carousel-control-prev absolute top-0 bottom-0 left-0 flex items-center justify-center border-0 p-0 text-center hover:no-underline hover:outline-none focus:no-underline focus:outline-none"
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="prev"
-        >
+        HAKKINDA
+      </h2>
+      <hr />
+      <Carousel>
+        <div>
+          <Image width={1000} height={100} src="/maps/tr.png" alt={"tr"} />
+          <p className="legend"></p>
           <span
-            className="carousel-control-prev-icon inline-block bg-no-repeat"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next absolute top-0 bottom-0 right-0 flex items-center justify-center border-0 p-0 text-center hover:no-underline hover:outline-none focus:no-underline focus:outline-none"
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="next"
-        >
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+            className="max-w-100 mr-2 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
+          >
+            Türkiye
+          </span>
+        </div>
+        <div>
+          <Image
+            width={1000}
+            height={100}
+            src="/maps/marmara.png"
+            alt={"marmara"}
+          />
           <span
-            className="carousel-control-next-icon inline-block bg-no-repeat"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Next</span>
-        </button>
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+            className="max-w-100 mr-2 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
+          >
+            Marmara Bölgesi
+          </span>
+          <p className="legend"></p>
+        </div>
+        <div>
+          <Image width={1000} height={100} src="/maps/ege.png" alt={"ege"} />
+          <span
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+            className="max-w-100 mr-2 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
+          >
+            Ege Bölgesi
+          </span>
+          <p className="legend"></p>
+        </div>
+        <div>
+          <Image
+            width={1000}
+            height={100}
+            src="/maps/akdeniz.png"
+            alt={"akdeniz"}
+          />
+          <span
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+            className="max-w-100 mr-2 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
+          >
+            Akdeniz Bölgesi
+          </span>
+          <p className="legend"></p>
+        </div>
+        <div>
+          <Image
+            width={1000}
+            height={100}
+            src="/maps/icanadolu.png"
+            alt={"icanadolu"}
+          />
+          <span
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+            className="max-w-100 mr-2 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
+          >
+            İç Anadolu Bölgesi
+          </span>
+          <p className="legend"></p>
+        </div>
+        <div>
+          <Image
+            width={1000}
+            height={100}
+            src="/maps/gdanadolu.png"
+            alt={"gdanadolu"}
+          />
+          <span
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+            className="max-w-100 mr-2 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
+          >
+            Güneydoğu Bölgesi
+          </span>
+          <p className="legend"></p>
+        </div>
+        <div>
+          <Image
+            width={1000}
+            height={100}
+            src="/maps/doanadolu.png"
+            alt={"doanadolu"}
+          />
+          <span
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+            className="max-w-100 mr-2 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
+          >
+            Doğu Anadolu Bölgesi
+          </span>
+          <p className="legend"></p>
+        </div>
+        <div>
+          <Image
+            width={1000}
+            height={100}
+            src="/maps/karadeniz.png"
+            alt={"karadeniz"}
+          />
+          <span
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "10px",
+            }}
+            className="max-w-100 mr-2 rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300"
+          >
+            Karadeniz Bölgesi
+          </span>
+          <p className="legend"></p>
+        </div>
+      </Carousel>
+      <div style={{ marginTop: "20px" }}>
+        {" "}
+        Yukarıda bulunan ekran görüntüleri Google Earth sitesinden alınmış ve{" "}
+        <a
+          href="https://github.com/onursercanyilmaz/depremler/blob/master/lib/constants/regions-data.json"
+          rel="noopener"
+          style={{ color: "red" }}
+        >
+          bu dosyadaki
+        </a>{" "}
+        minimum ve maksimum enlem ve boylam değerlerini belirlemek için
+        kullanılmıştır. Yapılan bölgesel filtrelemeler, bu kordinatlara göre,{" "}
+        <a
+          href="https://deprem.afad.gov.tr/event-service"
+          rel="noopener"
+          style={{ color: "red" }}
+        >
+          AFAD tarafından sunulan servisler
+        </a>{" "}
+        aracılığı ile depremleri filtrelemektedir. <br />
+        <br /> Projenin iskeleti Next.js ile{" "}
+        <a
+          href="https://github.com/acikkaynak/deprem-io/tree/07b0ae1f4985dad2653cdf2e44a5382b90ba4525"
+          rel="noopener"
+          style={{ color: "red" }}
+        >
+          10 Şubat tarihli deprem-io projesi
+        </a>
+        nden klonlanarak yazılmıştır.
+      </div>
+      <br />
+      <br />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "10px",
+        }}
+      >
+        <EarthSocial
+          github="https://github.com/onursercanyilmaz"
+          linkedin="https://linkedin.com/in/osy"
+        />
       </div>
     </div>
   );

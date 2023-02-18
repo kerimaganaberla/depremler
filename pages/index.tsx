@@ -127,6 +127,7 @@ useEffect(() => {
       )
       .then((response) => {
         setEarthquakes(response.data);
+
         setLoading(false);
       });
   };

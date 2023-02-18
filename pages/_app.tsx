@@ -11,8 +11,7 @@ const Meta = {
   name: "depremler",
   title: "depremler",
   image: "https://depremler.vercel.app/meta.png",
-  description:
-    "Geçmiş veya öncü olabilecek depremlerden haberdar olmamızı sağlayacak bir platform.",
+  description: "Geçmiş depremlerden haberdar olmayı sağlayacak bir platform.",
 };
 
 export default function App({ Component, pageProps }: AppProps) {
