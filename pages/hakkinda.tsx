@@ -1,11 +1,11 @@
 import BackButton from "@/components/back-button";
 
-export default function Hakki() {
+export default function Hakkinda() {
   return (
     <div>
       {" "}
       <BackButton />
-      Iletisim
+      Hakkında
     </div>
   );
 }

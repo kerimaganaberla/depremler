@@ -9,8 +9,8 @@ const EarthMap = dynamic(() => import("@/components/earth-map"), {
   ssr: false,
 });
 export default function Home() {
-  const arrangeDate = (date: any) => {
-    var today = date;
+  const arrangeDate = (dates: any) => {
+    var today = dates;
     var day: any = today.getDate();
     day = day < 10 ? "0" + day : day;
     var month: any = today.getMonth() + 1;
