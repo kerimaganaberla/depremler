@@ -101,7 +101,7 @@ export default function Home() {
   const [filteredEarthquakes, setFilteredEarthquakes] = useState<any>([]);
   /* const getRegions = () => {
     axios
-      .get(`https://depremolabilir-api.vercel.app/regions`)
+      .get(`https://depremler-api.vercel.app/regions`)
       .then((response) => {
         setRegions(response.data);
         
@@ -118,7 +118,7 @@ useEffect(() => {
   const getEarthquakes = () => {
     axios
       .get(
-        `https://depremolabilir-api.vercel.app/earthquake?minlat=${minLat}&maxlat=${maxLat}&minlon=${minLon}&maxlon=${maxLon}&start=${startDate}&end=${endDate}&limit=${limit}&orderby=${orderBy}&minmag=${minMag}`,
+        `https://depremler-api.vercel.app/earthquake?minlat=${minLat}&maxlat=${maxLat}&minlon=${minLon}&maxlon=${maxLon}&start=${startDate}&end=${endDate}&limit=${limit}&orderby=${orderBy}&minmag=${minMag}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -183,7 +183,6 @@ useEffect(() => {
   function getSubstractedStartDate(date: any, dayNumber: any) {
     var d = new Date(date);
 
-  
     d.setDate(d.getDate() - dayNumber);
 
     return arrangeDate(d);
@@ -194,7 +193,7 @@ useEffect(() => {
     getEarthquakes();
   };
 
- /* useEffect(() => {
+  /* useEffect(() => {
     console.log(filteredEarthquakes);
   }, [clickedChip]);*/
 
@@ -204,8 +203,6 @@ useEffect(() => {
   }, []);
 
   useEffect(() => {
-
-
     setMinLat(parseFloat(region[1]));
     setMaxLat(parseFloat(region[2]));
     setMinLon(parseFloat(region[3]));

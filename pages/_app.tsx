@@ -8,11 +8,11 @@ import Footer from "@/components/footer";
 import Container from "@/components/container";
 
 const Meta = {
-  name: "depremolabilir",
-  title: "depremolabilir",
-  image: "https://deprem-io.vercel.app/meta.jpg",
+  name: "depremler",
+  title: "depremler",
+  image: "https://depremler.vercel.app/meta.png",
   description:
-    "Öncü olabilecek depremlerden haberdar olmamızı sağlayacak bir platformdur.",
+    "Geçmiş veya öncü olabilecek depremlerden haberdar olmamızı sağlayacak bir platform.",
 };
 
 export default function App({ Component, pageProps }: AppProps) {
