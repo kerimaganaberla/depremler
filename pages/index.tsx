@@ -173,7 +173,7 @@ useEffect(() => {
   };
   const getEarthquakesById = (id: any) => {
     axios
-      .get(`http://localhost:8000/earthquake/${id}`, {
+      .get(`https://depremler-api.vercel.app/earthquake/${id}`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
