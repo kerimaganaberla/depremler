@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import data from "../lib/constants/regions-data.json";
 import EarthMenu from "@/components/HorizontalMenu/earth-menu";
 import EarthSelect from "@/components/earth-select";
+import EarthModal from "@/components/earth-modal";
 const EarthMap = dynamic(() => import("@/components/earth-map"), {
   ssr: false,
 });
@@ -79,7 +80,28 @@ export default function Home() {
 
     return dateTime;
   };
+  const [isPopupOpen, setIsPopupOpen] = useState<any>(false);
   const [earthquakes, setEarthquakes] = useState<any>([]);
+  const [earthquake, setEarthquake] = useState<any>([
+    {
+      rms: "null",
+      eventID: "null",
+      location: "null",
+      latitude: "38.734802",
+      longitude: "35.467987",
+      depth: "null",
+      type: "null",
+      magnitude: "null",
+      country: "null",
+      province: "null",
+      district: "null",
+      neighborhood: "null",
+      date: "null",
+      isEventUpdate: "null",
+      lastUpdateDate: "null",
+    },
+  ]);
+  const [eventID, setEventID] = useState<any>(0);
   const [regions, setRegions] = useState<any>(data);
   const [region, setRegion] = useState<any>(["Türkiye"]);
   const [startDate, setStartDate] = useState<any>(getYesterday());
@@ -131,7 +153,20 @@ useEffect(() => {
         setLoading(false);
       });
   };
-
+  const getEarthquakesById = (id: any) => {
+    axios
+      .get(`http://localhost:8000/earthquake/${id}`, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        setEarthquake(response.data);
+        console.log(response.data);
+        setLoading(false);
+      });
+  };
   const getTimeDifference = () => {
     var date1 = new Date(startDate);
     var date2 = new Date(endDate);
@@ -194,6 +229,15 @@ useEffect(() => {
     getEarthquakes();
   };
 
+  const onRowClick = (e: any) => {
+    getEarthquakesById(e.currentTarget.id);
+    console.log("onrow : ", [earthquake[0].latitude, earthquake[0].longitude]);
+    setIsPopupOpen(true);
+    setLoading(true);
+  };
+  const onClose = () => {
+    setIsPopupOpen(false);
+  };
   /* useEffect(() => {
     console.log(filteredEarthquakes);
   }, [clickedChip]);*/
@@ -222,7 +266,12 @@ useEffect(() => {
         minMag={minMag}
         onClick={getFromChip}
       />
-      <EarthMap data={earthquakes} />
+      <EarthMap
+        data={earthquakes}
+        id="mapMain"
+        height="100vh"
+        center={[38.734802, 35.467987]}
+      />
       <EarthSelect
         regions={regions}
         onMagnitudeSelect={(e: any) => setMinMag(e.target.value)}
@@ -233,7 +282,22 @@ useEffect(() => {
         onSearchClick={onSearchClick}
         onLoading={loading}
       />
-      <EarthquakeTable data={earthquakes} />
+      <EarthquakeTable data={earthquakes} onRowClick={onRowClick} />
+      <EarthModal
+        isPopupOpen={isPopupOpen}
+        onClose={onClose}
+        id="mapPopup"
+        data={earthquake}
+        center={[earthquake[0].latitude, earthquake[0].longitude]}
+        title={
+          "🚩 " +
+          earthquake[0].province +
+          " - " +
+          earthquake[0].district +
+          " - " +
+          earthquake[0].magnitude
+        }
+      />
     </>
   );
 }

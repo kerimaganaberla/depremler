@@ -42,7 +42,11 @@ export default function EarthquakeTable(props: any) {
                   : "null";
 
               return (
-                <tr key={index} id={earthquake.eventID}>
+                <tr
+                  key={index}
+                  id={earthquake.eventID}
+                  onClick={props.onRowClick}
+                >
                   <td>
                     {earthquake.province == null
                       ? earthquake.location

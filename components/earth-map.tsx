@@ -23,20 +23,26 @@ export function ChangeView(props: any) {
 }
 
 export default function Map(props: any) {
-  const center: any = [38.734802, 35.467987];
+  const center: any =
+    typeof props.center != "undefined" || typeof props.center != null
+      ? props.center
+      : [38.734802, 35.467987];
+  console.log(props.center);
   const { resolvedTheme, setTheme } = useTheme();
   return (
     <MapContainer
+      id={props.id}
       center={center}
       zoom={100}
       style={{
-        height: "100vh",
+        height: props.height,
         borderRadius: "25px",
         marginTop: "20px",
+        zIndex: 0,
       }}
     >
       <TileLayer
-        attribution='{&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url={
           resolvedTheme == "dark"
             ? "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
