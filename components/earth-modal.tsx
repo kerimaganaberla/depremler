@@ -46,7 +46,7 @@ export default function EarthModal(props: any) {
                     type="button"
                     onClick={props.onClose}
                   >
-                    Close
+                    Kapat
                   </button>
                 </div>
               </div>

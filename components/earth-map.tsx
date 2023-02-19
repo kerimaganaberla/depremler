@@ -27,7 +27,7 @@ export default function Map(props: any) {
     typeof props.center != "undefined" || typeof props.center != null
       ? props.center
       : [38.734802, 35.467987];
-  console.log(props.center);
+
   const { resolvedTheme, setTheme } = useTheme();
   return (
     <MapContainer

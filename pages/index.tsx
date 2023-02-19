@@ -119,7 +119,25 @@ export default function Home() {
   const [clickedChip, setClickedChip] = useState<any>([
     { province: "province", numberofEarthquake: "numberOfEarthquake" },
   ]);
-  const [filteredEarthquakes, setFilteredEarthquakes] = useState<any>([]);
+  const [filteredEarthquakes, setFilteredEarthquakes] = useState<any>([
+    {
+      rms: "null",
+      eventID: "null",
+      location: "null",
+      latitude: "38.734802",
+      longitude: "35.467987",
+      depth: "null",
+      type: "null",
+      magnitude: "null",
+      country: "null",
+      province: "null",
+      district: "null",
+      neighborhood: "null",
+      date: "null",
+      isEventUpdate: "null",
+      lastUpdateDate: "null",
+    },
+  ]);
   /* const getRegions = () => {
     axios
       .get(`https://depremler-api.vercel.app/regions`)
@@ -163,7 +181,6 @@ useEffect(() => {
       })
       .then((response) => {
         setEarthquake(response.data);
-        console.log(response.data);
         setLoading(false);
       });
   };
@@ -210,7 +227,12 @@ useEffect(() => {
     ];
     filterCityEarthquakes(province);
     setClickedChip(data);
+    setIsPopupOpen(true);
   };
+
+  useEffect(() => {
+    setEarthquake(filteredEarthquakes);
+  }, [clickedChip]);
 
   function getRegionValuesAsList(item: any) {
     var valueList = item[0].split(",");
@@ -231,16 +253,12 @@ useEffect(() => {
 
   const onRowClick = (e: any) => {
     getEarthquakesById(e.currentTarget.id);
-    console.log("onrow : ", [earthquake[0].latitude, earthquake[0].longitude]);
     setIsPopupOpen(true);
     setLoading(true);
   };
   const onClose = () => {
     setIsPopupOpen(false);
   };
-  /* useEffect(() => {
-    console.log(filteredEarthquakes);
-  }, [clickedChip]);*/
 
   useEffect(() => {
     getEarthquakes();
@@ -289,14 +307,7 @@ useEffect(() => {
         id="mapPopup"
         data={earthquake}
         center={[earthquake[0].latitude, earthquake[0].longitude]}
-        title={
-          "🚩 " +
-          earthquake[0].province +
-          " - " +
-          earthquake[0].district +
-          " - " +
-          earthquake[0].magnitude
-        }
+        title={"🚩 " + earthquake[0].province}
       />
     </>
   );
