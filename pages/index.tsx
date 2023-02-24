@@ -6,6 +6,7 @@ import data from "../lib/constants/regions-data.json";
 import EarthMenu from "@/components/HorizontalMenu/earth-menu";
 import EarthSelect from "@/components/earth-select";
 import EarthModal from "@/components/earth-modal";
+import PinColors from "@/components/pin-colors";
 const EarthMap = dynamic(() => import("@/components/earth-map"), {
   ssr: false,
 });
@@ -252,9 +253,9 @@ useEffect(() => {
   };
 
   const onRowClick = (e: any) => {
+    setLoading(true);
     getEarthquakesById(e.currentTarget.id);
     setIsPopupOpen(true);
-    setLoading(true);
   };
   const onClose = () => {
     setIsPopupOpen(false);
@@ -290,6 +291,7 @@ useEffect(() => {
         height="100vh"
         center={[38.734802, 35.467987]}
       />
+      <PinColors/>
       <EarthSelect
         regions={regions}
         onMagnitudeSelect={(e: any) => setMinMag(e.target.value)}

@@ -3,8 +3,49 @@ import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, useMap, Popup } from "react-leaflet";
 import L from "leaflet";
 import { useTheme } from "next-themes";
+
+const getIcon = (magnitude: any) => {
+  if (magnitude >= 0 && magnitude <= 2) {
+    var icon = L.icon({
+      iconUrl: "./blue_location.png",
+      iconSize: [25, 25],
+    });
+    return icon;
+  } else if (magnitude > 2 && magnitude <= 3) {
+    var icon = L.icon({
+      iconUrl: "./green_location.png",
+      iconSize: [25, 25],
+    });
+    return icon;
+  } else if (magnitude > 3 && magnitude <= 4) {
+    var icon = L.icon({
+      iconUrl: "./yellow_location.png",
+      iconSize: [25, 25],
+    });
+    return icon;
+  } else if (magnitude > 4 && magnitude <= 5) {
+    var icon = L.icon({
+      iconUrl: "./orange_location.png",
+      iconSize: [25, 25],
+    });
+    return icon;
+  } else if (magnitude > 5) {
+    var icon = L.icon({
+      iconUrl: "./red_location.png",
+      iconSize: [25, 25],
+    });
+    return icon;
+  } else {
+    var icon = L.icon({
+      iconUrl: "./nodata.png",
+      iconSize: [25, 25],
+    });
+    return icon;
+  }
+};
+
 const icon = L.icon({
-  iconUrl: "./location.png",
+  iconUrl: "./red_location.png",
   iconSize: [25, 25],
 });
 const iconNoData = L.icon({
@@ -64,7 +105,7 @@ export default function Map(props: any) {
               }
               icon={
                 item.latitude != "null" && item.longitude != "null"
-                  ? icon
+                  ? getIcon(parseFloat(item.magnitude))
                   : iconNoData
               }
             >
