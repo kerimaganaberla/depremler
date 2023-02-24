@@ -35,14 +35,14 @@ export default function PinColors() {
               width={40}
               height={40}
             />
-              <span
+            <span
               style={{
                 display: "flex",
                 justifyContent: "center",
               }}
               className="text-xs font-medium text-green-400 "
             >
-              {"> 1"}
+              {"> 2"}
             </span>
           </Grid>
           <Grid item xs={1}>
@@ -52,7 +52,7 @@ export default function PinColors() {
               width={40}
               height={40}
             />
-              <span
+            <span
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -69,7 +69,7 @@ export default function PinColors() {
               width={40}
               height={40}
             />
-              <span
+            <span
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -86,7 +86,7 @@ export default function PinColors() {
               width={40}
               height={40}
             />
-              <span
+            <span
               style={{
                 display: "flex",
                 justifyContent: "center",
