@@ -165,7 +165,7 @@ export default function Hakkinda() {
       <div style={{ marginTop: "20px" }}>
         {" "}
         Yukarıda bulunan ekran görüntüleri Google Earth sitesinden alınmış ve{" "}
-        <
+        <a
           href="https://github.com/kerimmkirac"
           rel="noopener"
           style={{ color: "red" }}
