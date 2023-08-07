@@ -165,13 +165,6 @@ export default function Hakkinda() {
       <div style={{ marginTop: "20px" }}>
         {" "}
         Yukarıda bulunan ekran görüntüleri Google Earth sitesinden alınmış ve{" "}
-        <a
-          href="https://github.com/onursercanyilmaz/depremler/blob/master/lib/constants/regions-data.json"
-          rel="noopener"
-          style={{ color: "red" }}
-        >
-          bu dosyadaki
-        </a>{" "}
         minimum ve maksimum enlem ve boylam değerlerini belirlemek için
         kullanılmıştır. Yapılan bölgesel filtrelemeler, bu kordinatlara göre,{" "}
         <a
@@ -184,13 +177,12 @@ export default function Hakkinda() {
         aracılığı ile depremleri filtrelemektedir. <br />
         <br /> Projenin iskeleti Next.js ile{" "}
         <a
-          href="https://github.com/acikkaynak/deprem-io/tree/07b0ae1f4985dad2653cdf2e44a5382b90ba4525"
+          href="https://github.com/kerimmkirac"
           rel="noopener"
           style={{ color: "red" }}
         >
-          10 Şubat tarihli deprem-io projesi
+          kerimmkirac tarafından yazılmıştır
         </a>
-        nden klonlanarak yazılmıştır.
       </div>
       <br />
       <br />
@@ -202,8 +194,8 @@ export default function Hakkinda() {
         }}
       >
         <EarthSocial
-          github="https://github.com/onursercanyilmaz"
-          linkedin="https://linkedin.com/in/osy"
+          github="https://github.com/kerimmkirac"
+          instagram="https://instagram.com/kerimmkirac"
         />
       </div>
     </div>
