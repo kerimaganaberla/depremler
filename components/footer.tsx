@@ -18,8 +18,8 @@ export default function Footer() {
           <div style={{ display: "column", justifyContent: "center" }}>
             {" "}
             <EarthSocial
-              github="https://github.com/onursercanyilmaz"
-              linkedin="https://linkedin.com/in/osy"
+              github="https://github.com/kerimmkirac"
+              instagraö="https://instagram.com/kerimmkirac"
             />{" "}
           </div>
         </div>
