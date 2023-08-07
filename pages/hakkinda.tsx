@@ -165,6 +165,13 @@ export default function Hakkinda() {
       <div style={{ marginTop: "20px" }}>
         {" "}
         Yukarıda bulunan ekran görüntüleri Google Earth sitesinden alınmış ve{" "}
+        <
+          href="https://github.com/kerimmkirac"
+          rel="noopener"
+          style={{ color: "red" }}
+        >
+          @kerimmkirac tarafından
+        </a>{" "}
         minimum ve maksimum enlem ve boylam değerlerini belirlemek için
         kullanılmıştır. Yapılan bölgesel filtrelemeler, bu kordinatlara göre,{" "}
         <a
@@ -181,8 +188,9 @@ export default function Hakkinda() {
           rel="noopener"
           style={{ color: "red" }}
         >
-          kerimmkirac tarafından yazılmıştır
+          @kerimmkirac
         </a>
+        tarafından kodlanmıştır.
       </div>
       <br />
       <br />
